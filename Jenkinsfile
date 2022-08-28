@@ -10,3 +10,4 @@ node {
       def app = docker.build("docker-nodejs-demo:${commit_id}", '.').push()
     }
   }
+}

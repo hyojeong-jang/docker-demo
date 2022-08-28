@@ -12,8 +12,8 @@ node {
       image = docker.image("helloworld:${commit_id}")
       image.pull()
     }
-    sshagent(['ec2']){
-      sh "ssh -o StrictHostKeyChecking=no ubuntu@ec2-52-79-235-250.ap-northeast-2.compute.amazonaws.com 'docker run helloworld:${image.imageName()}'"
+    sshagent(credentials: ['ec2']){
+      sh "ssh -o StrictHostKeyChecking=no ubuntu@ec2-52-79-235-250.ap-northeast-2.compute.amazonaws.com 'docker run ${image.imageName()}'"
     }
   }
 

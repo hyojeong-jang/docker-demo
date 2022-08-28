@@ -9,7 +9,8 @@ node {
   stage('Deploy') {
     def image
     docker.withRegistry("https://116927014662.dkr.ecr.ap-northeast-2.amazonaws.com", "ecr:ap-northeast-2:ecr") {
-      image = docker.image("helloworld:${commit_id}").pull()
+      image = docker.image("helloworld:${commit_id}")
+      image.pull()
     }
     sshagent(['ecr']){
       sh "ssh -o StrictHostKeyChecking=no ubuntu@ec2-52-79-235-250.ap-northeast-2.compute.amazonaws.com 'docker run helloworld:${image.imageName()}'"

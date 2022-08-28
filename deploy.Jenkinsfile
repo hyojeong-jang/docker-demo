@@ -19,6 +19,7 @@ node {
     // }
     sshagent(credentials: ['ec2']){
       sh 'ssh -o StrictHostKeyChecking=no ubuntu@ec2-52-79-235-250.ap-northeast-2.compute.amazonaws.com "whoami"'
+      sh "ssh -o StrictHostKeyChecking=no ubuntu@ec2-52-79-235-250.ap-northeast-2.compute.amazonaws.com 'aws ecr get-login-password --region ap-northeast-2 | docker login --username AWS --password-stdin 116927014662.dkr.ecr.ap-northeast-2.amazonaws.com'"
       sh "ssh -o StrictHostKeyChecking=no ubuntu@ec2-52-79-235-250.ap-northeast-2.compute.amazonaws.com 'docker pull 116927014662.dkr.ecr.ap-northeast-2.amazonaws.com/helloworld:dddf480'"
       // sh "ssh -o StrictHostKeyChecking=no ubuntu@ec2-52-79-235-250.ap-northeast-2.compute.amazonaws.com 'docker run ${image.imageName()}'"
       sh "ssh -o StrictHostKeyChecking=no ubuntu@ec2-52-79-235-250.ap-northeast-2.compute.amazonaws.com 'docker run helloworld:dddf480'"
